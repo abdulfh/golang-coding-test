@@ -3,5 +3,89 @@
     "info": {
         "contact": {}
     },
-    "paths": {}
+    "paths": {
+        "/api/v1/fizzbuzz": {
+            "get": {
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "FizzBuzz Challange"
+                ],
+                "summary": "FizzBuzz.",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/markpaid/{bill_amount}": {
+            "get": {
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Mark Paid Bill"
+                ],
+                "summary": "Mark Paid Bill Challange.",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Billing Amount",
+                        "name": "bill_amount",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/response.ResponseApi"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/multiple": {
+            "get": {
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Multiple"
+                ],
+                "summary": "Multiple 3 or 5 below 1000 Challange.",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "response.ResponseApi": {
+            "type": "object",
+            "properties": {
+                "data": {},
+                "responseCode": {
+                    "type": "string"
+                },
+                "responseDesc": {
+                    "type": "string"
+                }
+            }
+        }
+    }
 }

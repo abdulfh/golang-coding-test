@@ -1,4 +1,57 @@
+definitions:
+  response.ResponseApi:
+    properties:
+      data: {}
+      responseCode:
+        type: string
+      responseDesc:
+        type: string
+    type: object
 info:
   contact: {}
-paths: {}
+paths:
+  /api/v1/fizzbuzz:
+    get:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              type: string
+            type: array
+      summary: FizzBuzz.
+      tags:
+      - FizzBuzz Challange
+  /api/v1/markpaid/{bill_amount}:
+    get:
+      parameters:
+      - description: Billing Amount
+        in: path
+        name: bill_amount
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.ResponseApi'
+      summary: Mark Paid Bill Challange.
+      tags:
+      - Mark Paid Bill
+  /api/v1/multiple:
+    get:
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: integer
+      summary: Multiple 3 or 5 below 1000 Challange.
+      tags:
+      - Multiple
 swagger: "2.0"

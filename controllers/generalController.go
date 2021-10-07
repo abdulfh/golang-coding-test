@@ -18,6 +18,11 @@ func InitGeneralController(services services.GeneralServices) *generalController
 	return &generalController{services}
 }
 
+// @Summary FizzBuzz.
+// @Tags FizzBuzz Challange
+// @Produce json
+// @Success 200 {object} []string
+// @Router /api/v1/fizzbuzz [get]
 func (controller *generalController) FizzBuzz(context *gin.Context) {
 	response := response.ResponseApi{}
 
@@ -36,6 +41,11 @@ func (controller *generalController) FizzBuzz(context *gin.Context) {
 	context.JSON(http.StatusOK, response)
 }
 
+// @Summary Multiple 3 or 5 below 1000 Challange.
+// @Tags Multiple
+// @Produce json
+// @Success 200 {object} int
+// @Router /api/v1/multiple [get]
 func (controller *generalController) Multiple(context *gin.Context) {
 	response := response.ResponseApi{}
 
@@ -54,6 +64,12 @@ func (controller *generalController) Multiple(context *gin.Context) {
 	context.JSON(http.StatusOK, response)
 }
 
+// @Summary Mark Paid Bill Challange.
+// @Tags Mark Paid Bill
+// @Produce json
+// @Param bill_amount path string true "Billing Amount"
+// @Success 200 {object} response.ResponseApi
+// @Router /api/v1/markpaid/{bill_amount} [get]
 func (controller *generalController) MarkPaid(context *gin.Context) {
 	response := response.ResponseApi{}
 	billAmount := context.Param("bill")
