@@ -1,11 +1,13 @@
 package services
 
 import (
+	"fmt"
 	"strconv"
 )
 
 type GeneralServices interface {
 	FizzBuzz() (dataOutput []string, err error)
+	Multiple() (dataOutput int, err error)
 }
 
 type generalServices struct{}
@@ -35,3 +37,13 @@ func (services *generalServices) FizzBuzz() (dataOutput []string, err error) {
 	return dataOutput, nil
 }
 
+func (services *generalServices) Multiple() (dataOutput int, err error) {
+	for i := 1; i <= 1000; i++ {
+		if i%3 == 0 || i%5 == 0 {
+			fmt.Println(i)
+			dataOutput += i
+		}
+	}
+
+	return dataOutput, nil
+}

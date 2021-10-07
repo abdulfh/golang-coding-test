@@ -46,6 +46,7 @@ func (goRouter *GoRouter) Routers() {
 	api := router.Group("/api/v1")
 	{
 		api.GET("/fizzbuzz", generalController.FizzBuzz)
+		api.GET("/multiple", generalController.Multiple)
 	}
 
 	router.NoRoute(func(c *gin.Context) {
