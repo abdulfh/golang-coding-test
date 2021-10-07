@@ -8,6 +8,7 @@ import (
 type GeneralServices interface {
 	FizzBuzz() (dataOutput []string, err error)
 	Multiple() (dataOutput int, err error)
+	MarkPaid(billAmount string) (dataOutput []int, err error)
 }
 
 type generalServices struct{}
@@ -42,6 +43,39 @@ func (services *generalServices) Multiple() (dataOutput int, err error) {
 		if i%3 == 0 || i%5 == 0 {
 			fmt.Println(i)
 			dataOutput += i
+		}
+	}
+
+	return dataOutput, nil
+}
+
+func (services *generalServices) MarkPaid(billAmount string) (dataOutput []int, err error) {
+	arrayInt := []int{1000, 3000, 1000, 5000, 10000}
+	convertToInt, err := strconv.Atoi(billAmount)
+	if err != nil {
+		return nil, err
+	}
+
+	for indexOne := 0; indexOne < len(arrayInt); indexOne++ {
+		if convertToInt == arrayInt[indexOne] {
+			dataOutput = append(dataOutput, indexOne)
+			return dataOutput, nil
+		} else {
+			for indexSecond := indexOne + 1; indexSecond < len(arrayInt); indexSecond = indexSecond + 1 {
+				if arrayInt[indexOne]+arrayInt[indexSecond] == convertToInt {
+					dataOutput = append(dataOutput, indexOne)
+					dataOutput = append(dataOutput, indexSecond)
+				} else {
+					for indexThird := indexSecond + 1; indexThird < len(arrayInt); indexThird = indexThird + 1 {
+						if arrayInt[indexOne]+arrayInt[indexSecond]+arrayInt[indexThird] == convertToInt {
+							dataOutput = append(dataOutput, indexOne)
+							dataOutput = append(dataOutput, indexSecond)
+							dataOutput = append(dataOutput, indexThird)
+							return dataOutput, nil
+						}
+					}
+				}
+			}
 		}
 	}
 

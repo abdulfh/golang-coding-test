@@ -47,6 +47,7 @@ func (goRouter *GoRouter) Routers() {
 	{
 		api.GET("/fizzbuzz", generalController.FizzBuzz)
 		api.GET("/multiple", generalController.Multiple)
+		api.GET("/markpaid/:bill", generalController.MarkPaid)
 	}
 
 	router.NoRoute(func(c *gin.Context) {
