@@ -9,6 +9,9 @@ import (
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
+	ginSwagger "github.com/swaggo/gin-swagger"
+	"github.com/swaggo/gin-swagger/swaggerFiles"
+	"github.com/swaggo/swag/example/basic/docs"
 )
 
 type GoRouter struct {
@@ -43,8 +46,15 @@ func (goRouter *GoRouter) Routers() {
 	generalServices := services.InitGeneralServices()
 	generalController := controllers.InitGeneralController(generalServices)
 
+	docs.SwaggerInfo.Title = "Golang Template Swagger"
+	docs.SwaggerInfo.Description = "This is a list of sample api for Golang Template."
+	docs.SwaggerInfo.Version = "1.0"
+	docs.SwaggerInfo.Schemes = []string{"http", "https"}
+	docs.SwaggerInfo.Host = fmt.Sprintf("%s%s", helper.GetEnv("SWAGGER_HOST", "localhost"), helper.GetEnv("SERVER_PORT", ":40001"))
+
 	api := router.Group("/api/v1")
 	{
+		api.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 		api.GET("/fizzbuzz", generalController.FizzBuzz)
 		api.GET("/multiple", generalController.Multiple)
 		api.GET("/markpaid/:bill", generalController.MarkPaid)
